@@ -3,9 +3,9 @@
 Plugin Name: easySEO
 Plugin URI: http://suchmaschinenoptimierung.10010.de
 Description: Einfaches SEO Tool f&uuml;r die Bereitstellung der wichtigsten Anpassungen: Manipulation des title-Tag, Description bearbeiten, Sitemaps, noindex-Tags f&uuml;r Archive und Kategorie
-Version: 1.0
+Version: 1.2
 Author: Jens Bekersch
-Author URI: http://suchmaschinenoptimierung.10010.de
+Author URI: http://www.bekersch.com
 License: GPL 2
     Copyright 2010  PLUGIN_Jens Bekersch
 
@@ -35,7 +35,7 @@ function theTitle() {
  $boolFrontPage = is_front_page();
  $boolCategory  = is_category();
  $boolPage      = is_page();
- 
+
  $strBlogName   = get_bloginfo();
 /*
 * Dynamische title-tags, description meta-tag, nofollow-Anweisungen
@@ -64,7 +64,7 @@ function theTitle() {
        <title>'.$objCategory->name.'</title>
        <meta name="robots" content="noindex, follow">
        ';
- } elseif ($boolPage = true) {                                     //Seite
+ } elseif ($boolPage == true) {                                     //Seite
   $intPageId    = intval(get_query_var('page_id'));
   $objPage      = get_page($intPageId);
   echo '
@@ -75,9 +75,13 @@ function theTitle() {
        <meta name="robots" content="noindex, follow">
        ';
  }
-
 }
-
+/*
+* Noindex für Feed
+*/
+  function TheFeedNoIndex() {
+    echo '<xhtml:meta xmlns:xhtml="http://www.w3.org/1999/xhtml" name="robots" content="noindex" />' . "\n";
+  }
 /*
 * Urllist + XML Sitemap
 */
@@ -245,6 +249,8 @@ function newUrllistXMLEntry() {
 */
 add_action('wp_head', 'theTitle');
 add_action ( 'publish_post', 'newUrllistXMLEntry' );
+add_action('commentsrss2_head', 'TheFeedNoIndex');
+add_action('rss2_head', 'TheFeedNoIndex');
 remove_action('wp_head', 'rsd_link'); // Really Simple Discovery Eintrag entfernen
 remove_action('wp_head', 'wlwmanifest_link');  // Windows Live Writer Link entfernen
 remove_action('wp_head', 'wp_generator');  // Versionsnummern-Ausgabe entfernen
