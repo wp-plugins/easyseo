@@ -4,7 +4,7 @@ Donate link: http://suchmaschinenoptimierung.10010.de/
 Tags: seo, suchmaschinenoptimierung
 Requires at least: 2.0.2
 Tested up to: 2.9
-Stable tag: 1.1
+Stable tag: 1.2
 
 Das easySEO Plugin bietet eine einfache Moeglichkeit, grundlegende Optimierungen seines Blogs per Plugin
 vorzunehmen.
@@ -39,8 +39,16 @@ Fuer dieses Plugin benoetigen Sie einen Webspace mit mindestens PHP 5.
 
 == Changelog ==
 
-Version 1.0
+= 1.2 =
+* RSS Feeds werden mit einem 'noindex'-Tag versehen
+
+= 1.0 =
+
 
 == Upgrade Notice ==
 
+= 1.2 =
+RSS Feeds werden mit einem 'noindex'-Tag versehen
 
+= 1.0 =
+Neue Version inkl. bugfix erhaeltlich
